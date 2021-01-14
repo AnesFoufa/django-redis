@@ -125,11 +125,7 @@ class DjangoRedisCacheTestCustomKeyFunction(unittest.TestCase):
 class DjangoRedisCacheTests(unittest.TestCase):
     def setUp(self):
         self.cache = cache
-
-        try:
-            self.cache.clear()
-        except Exception:
-            pass
+        self.cache.clear()
 
     def test_setnx(self):
         # we should ensure there is no test_key_nx in redis
@@ -288,7 +284,6 @@ class DjangoRedisCacheTests(unittest.TestCase):
 
         res = cache.get("add_key")
         self.assertEqual(res, "Initial value")
-        cache.delete("other_key")
         res = self.cache.add("other_key", "New value")
         self.assertIs(res, True)
 
